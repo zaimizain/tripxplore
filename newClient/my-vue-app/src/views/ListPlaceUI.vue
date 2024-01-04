@@ -2,43 +2,69 @@
     <v-container>
         <!-- Add new post section -->
         <v-row no-gutters>
-            <v-col sm="10" class="mx-auto">
-                <v-card class="pa-5">
-                    <v-card-title>Add new post</v-card-title>
-                    <v-divider></v-divider>
-                    <v-form ref="form" @submit.prevent="submitForm" class="pa-5" enctype="multipart/form-data">
-                        <!-- Your form fields here -->
-                        <v-text-field v-model="placeClass.post.activities" label="activities" prepend-icon="mdi-note"
-                            :rules="placeClass.rules"></v-text-field>
-                        <v-text-field v-model="placeClass.post.location" label="location" prepend-icon="mdi-view-list"
-                            :rules="placeClass.rules"></v-text-field>
-                            <v-text-field v-model="placeClass.post.expect" label="expect" prepend-icon="mdi-note"
-                            :rules="placeClass.rules"></v-text-field>
-                        <v-text-field v-model="placeClass.post.age" label="age" prepend-icon="mdi-view-list"
-                            :rules="placeClass.rules"></v-text-field>
-                            <v-text-field v-model="placeClass.post.notes" label="notes" prepend-icon="mdi-note"
-                            :rules="placeClass.rules"></v-text-field>
-                        <v-text-field v-model="placeClass.post.budget" label="budget" prepend-icon="mdi-view-list"
-                            :rules="placeClass.rules"></v-text-field>
-
-                            <v-file-input @change="selectFile" :rules="placeClass.rules" show-size counter multiple
-                            label="Select Image"></v-file-input>
+            
+            <v-row no-gutters> </v-row>
+ 
+          
+          <v-btn class="mx-3 my-3" @click="openDialog">+</v-btn>
 
 
-                        <v-btn type="submit"  class="mt-3" color="primary">Add post</v-btn>
-                    </v-form>
-                </v-card>
-            </v-col>
+          <v-dialog v-model="dialog" max-width="600px">
+        <v-card>
+          <v-card-title>
+            <span class="headline">Insert Location</span>
+          </v-card-title>
+          <v-form ref="form" @submit.prevent="submitForm" class="pa-5" enctype="multipart/form-data">      <v-card-text>
+            <!-- Location Textfield -->
+            <v-text-field v-model="locationClass.post.location" :rules="locationClass.rules" label="Location"></v-text-field>
+            <!-- Place Textfield -->
+            <v-text-field v-model="locationClass.post.placeName" :rules="locationClass.rules" label="Place Name"></v-text-field>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn @click="closeDialog" color="error">Cancel</v-btn>
+            <v-btn @click="submitForm"  color="primary">Save</v-btn>
+          </v-card-actions>
+        </v-form>
+    
+        </v-card>
+      </v-dialog>
+  
+            
         </v-row>
+        
 
+        <v-sheet>
+
+ 
+
+<v-col class="pa-2" v-for="post in posts" :key="post._id">
+    <v-card href="/placedetails">
+    <v-card  class="mx-auto myp4" height="200" width="1000" :to="{  params: { id: post._id } }">
+        
+        <v-row>
+        <img  height="200" width="300" :src="`/${post.image}`" />
+     
+       <v-col><b class="text-h5">{{ post.location }} </b> 
+        <v-col>{{ post.notes }}</v-col> <v-col>Located in {{ post.location }}</v-col></v-col>
        
+        <v-btn color="red" text @click="removePost(post._id)">Delete</v-btn>
+   
+        </v-row>
+    </v-card>
+    </v-card>
+
+    
+    
+</v-col>
+</v-sheet>
      
     </v-container>
 </template>
-  
+
 <script>
 import placeClass from "../components/PlaceComponent/placeClass";
 import pAPI from "../components/PlaceComponent/placeAPI";
+import locationClass from "../components/LocationComponent/locationClass";
 
 export default {
     data() {
@@ -47,24 +73,26 @@ export default {
         const pushRoute = (routeName, params) => this.$router.push({ name: routeName, params });
 
         return {
-            placeClass: new placeClass({ validateForm, pushRoute, router }),
+            placeClass: new placeClass({ router }),
+            locationClass: new locationClass({ validateForm, pushRoute, router }),
             posts: [],
+            dialog: false,
         };
     },
 
     async created() {
         this.fetchPosts(); // Fetch posts when the component is created
-        
     },
     methods: {
+        openDialog() {
+        this.dialog = true;
+      },
+      closeDialog() {
+        this.dialog = false;
+      },
         async fetchPosts() {
             this.posts = await pAPI.getAllPlace();
         },
-        selectFile(file) {
-            console.log("Selected file:", file);
-            this.placeClass.selectFile(file);
-        },
-
         async submitForm() {
     console.log("Submitting form...");
     try {
@@ -73,7 +101,7 @@ export default {
 
         if (isValid) {
             // If the form is valid, submit the form
-            await this.placeClass.submitForm();
+            await this.locationClass.submitForm();
 
             // After submitting the form, reset form data if the ref is defined
             if (this.$refs.form) {
@@ -126,4 +154,7 @@ export default {
     },
 };
 </script>
+  
+  
+
   
