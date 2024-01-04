@@ -5,7 +5,7 @@
 
 
       <router-link style="color: white; text-decoration: none" to="/" replace><v-row>
-          <v-img height="70" width="305" src="@/assets/logo1.png"></v-img>
+          <v-img height="70" width="305" src="assets/logo1.png"></v-img> 
           <div class="myFont" align="center">BookTrack</div>
         </v-row></router-link>
 

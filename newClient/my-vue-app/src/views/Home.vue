@@ -21,7 +21,7 @@
       </v-col>
 
         <v-sheet class="pa-2 ma-2" justify-end>
-          <v-img height="600" width="800" src="/wall1.jpg" class="mx-4 my-4"></v-img>
+          <v-img height="600" width="800" src="assets/wall1.jpg" class="mx-4 my-4"></v-img>
         </v-sheet>
 
 
@@ -77,7 +77,6 @@
 import placeClass from "../components/PlaceComponent/placeClass";
 import pAPI from "../components/PlaceComponent/placeAPI";
 import locationClass from "../components/LocationComponent/locationClass";
-import wall1 from "../assets/wall1.jpg"
 
 
 export default {
