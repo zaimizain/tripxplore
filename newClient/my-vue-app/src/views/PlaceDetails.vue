@@ -9,7 +9,7 @@
     max-width="700"
   >
     <v-img
-    :src="`/${post.image}`"
+    :src="`/images/${post.image}`"
       height="500px"
       width="700px"
       cover

@@ -21,8 +21,8 @@ class placeClass {
   }
 
   selectFile(file) {
-    if (file && file.length > 0) {
-        this.image = file[0];
+    if (file) {
+        this.image = file;
     } else {
         console.error("Invalid file:", file);
     }

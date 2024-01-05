@@ -30,9 +30,9 @@
 
     </v-container>
         
-    
+    <div><router-view :key="$route.path"></router-view></div>
     <v-col>
-      <router-view></router-view>
+      
     </v-col>
 
     <v-card>
@@ -41,7 +41,7 @@
         <v-row no-gutters>
         <v-col class="mx-15">
           <v-sheet class="pa-2 ma-2">
-          <v-img  width="162" src="@/assets/logo1.png" class="mx-4 my-4" ></v-img>
+          <v-img  width="162" src="assets/logo1.png" class="mx-4 my-4" ></v-img>
           <p class="justify-center my-1"> Your Journey, Our Itinerary:</p>
           <p class="justify-center my-1"> Explore, Experience, Enjoy!</p>
         </v-sheet>
@@ -72,7 +72,7 @@
         </v-col>
         <v-col class="mx-15">
           <v-sheet class="pa-2 ma-2">
-          <v-img  width="162" src="@/assets/logo1.png" class="mx-4 my-4" ></v-img>
+          <v-img  width="162" src="assets/logo1.png" class="mx-4 my-4" ></v-img>
           <p class="justify-center my-1"> Your Journey, Our Itinerary:</p>
           <p class="justify-center my-1"> Explore, Experience, Enjoy!</p>
         </v-sheet>
@@ -83,6 +83,22 @@
   </v-card>
   </v-app>
 </template>
+
+<!-- <template>
+  <v-layout class="rounded rounded-md">
+    <v-navigation-drawer>
+      <v-list>
+        <v-list-item title="Navigation drawer"></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar title="Application bar"></v-app-bar>
+
+    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+      <router-view></router-view>
+    </v-main>
+  </v-layout>
+</template> -->
 
 <script>
 export default {

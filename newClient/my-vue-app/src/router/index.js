@@ -1,4 +1,4 @@
-import {createRouter,createWebHashHistory} from 'vue-router'
+import {createRouter,createWebHashHistory,createWebHistory} from 'vue-router'
 import Home from '../views/Home.vue'
 import UserUI from '../views/UserUI.vue'
 import PlaceUI from '../views/PlaceUI.vue'
@@ -6,6 +6,9 @@ import ListPlaceUI from '../views/ListPlaceUI.vue'
 import Dialog from '../views/Dialog.vue'
 import PlaceDetails from '../views/PlaceDetails.vue'
 import ListItinerary from '../views/ListItinerary.vue'
+import LogIn from '../views/LogIn.vue'
+import SignUp from '../views/SignUp.vue'
+import Test from "../views/Test.vue"
 
 const routes = [
   {
@@ -17,6 +20,16 @@ const routes = [
     path: '/userUI',
     name: 'userUI',
     component: UserUI
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LogIn
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: SignUp
   },
   {
     path: '/dialog',
@@ -42,11 +55,15 @@ const routes = [
     path: '/placeUI',
     name: 'placeUI',
     component: PlaceUI
+  },{
+    path: "/test",
+    name: "Test",
+    component: Test
   }
 ]
 
-const router = new createRouter({
-  history: createWebHashHistory(),
+const router = createRouter({
+  history: createWebHistory(),
   routes
 })
 

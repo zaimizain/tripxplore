@@ -1,13 +1,17 @@
-  
+<script setup >
+
+</script>
+
 <template>
+  <div>
   <v-container class="mx-auto justify-center">
 
     <v-btn type="submit" href="/userUI">Submit</v-btn>
-
+    
     <v-row>
       <v-col>
         <v-sheet class="pa-2 ma-2">
-          <h3>BEST DESTINATIONS AROUND THE WORLD</h3>
+          <h3>BEST DESTINATIONS AROUND THE WORLD </h3>
           <h1>Travel, enjoy
             and live a new
             and full life</h1>
@@ -36,13 +40,14 @@
           <h3 class="my-3">Create and customize your perfect travel schedule with just a few clicks.</h3>
          
           <v-sheet class="justify-end">
-            <v-btn href="/listplaceUI" >+</v-btn>
+            <router-link to="/listplaceUI"><v-btn>+</v-btn></router-link>
           </v-sheet>
          
           
           <v-col sm="2" class="pa-2" v-for="post in posts" :key="post._id">
-            <v-card class="pa-2"  :to="{ name: 'post', params: { id: post._id } }">
-              <v-img height="250" width="1900" :src="`/${post.image}`"></v-img>
+            <!-- <v-card class="pa-2"  :to="{ name: 'post', params: { id: post._id } }"> -->
+              <v-card class="pa-2" >
+              <v-img height="250" width="1900" :src="`/images/${post.image}`"></v-img>
               <v-card-title class="headline">
                 {{ post.location }}
               </v-card-title>
@@ -71,30 +76,34 @@
    <v-row> <v-btn href="/listitinerary">+</v-btn></v-row>
     </v-row>
   </v-container>
+</div>
 </template>
   
 <script>
 import placeClass from "../components/PlaceComponent/placeClass";
 import pAPI from "../components/PlaceComponent/placeAPI";
 import locationClass from "../components/LocationComponent/locationClass";
-
+import {useAuth} from "vue-clerk"
 
 export default {
 
     data() {
-        const router = this.$router; // Store the router instance in a variable
-        const validateForm = () => this.$refs.form.validate();
-        const pushRoute = (routeName, params) => this.$router.push({ name: routeName, params });
+        // const router = this.$router; // Store the router instance in a variable
+        // const validateForm = () => this.$refs.form.validate();
+        // const pushRoute = (routeName, params) => this.$router.push({ name: routeName, params });
         
      
         return {
-            placeClass: new placeClass({ router }),
-            locationClass: new locationClass({ validateForm, pushRoute, router }),
+            // placeClass: new placeClass({ router }),
+            // locationClass: new locationClass({ validateForm, pushRoute, router }),
             posts: [],
         };
     },
 
     async created() {
+      const {getToken} = useAuth();
+      console.log(getToken.value)
+      console.log(await pAPI.getAllPlace());
         this.fetchPosts(); // Fetch posts when the component is created
     },
     methods: {
@@ -104,4 +113,3 @@ export default {
     },
 };
 </script>
- 

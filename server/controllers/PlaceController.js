@@ -27,6 +27,7 @@ module.exports = class pAPI {
   // create a post
   static async createPlace(req,res){
       const post = req.body;
+      console.log(req.file)
       const imagename = req.file.filename;
       post.image = imagename;
       try {

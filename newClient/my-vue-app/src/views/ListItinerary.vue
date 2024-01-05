@@ -95,7 +95,7 @@ export default {
     addCard(day) {
     // Ensure the day has an array to store cards
     if (!this.dayCards[day]) {
-      this.$set(this.dayCards, day, []);
+      this.dayCards[day]=[];
     }
 
     // Add a new card to the array for the given day

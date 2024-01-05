@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
+import { clerkPlugin } from 'vue-clerk/plugin'
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -14,5 +15,11 @@ const vuetify = createVuetify({
     directives,
   })
 
+const app = createApp(App);
+app.use(router)
+app.use(vuetify)
 
-createApp(App).use(vuetify).use(router).mount('#app')
+app.use(clerkPlugin, {
+  publishableKey: import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+})
+app.mount("#app")

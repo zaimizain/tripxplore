@@ -41,8 +41,8 @@
     <v-card href="/placedetails">
     <v-card  class="mx-auto myp4" height="200" width="1000" :to="{  params: { id: post._id } }">
         
-        <v-row>
-        <img  height="200" width="300" :src="`/${post.image}`" />
+        <v-row> 
+        <img  height="200" width="300" :src="`/images/${post.image}`" />
      
        <v-col><b class="text-h5">{{ post.location }} </b> 
         <v-col>{{ post.notes }}</v-col> <v-col>Located in {{ post.location }}</v-col></v-col>

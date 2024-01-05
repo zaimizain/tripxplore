@@ -48,6 +48,7 @@ export default {
 
         return {
             placeClass: new placeClass({ validateForm, pushRoute, router }),
+            image: [],
             posts: [],
         };
     },
@@ -60,9 +61,9 @@ export default {
         async fetchPosts() {
             this.posts = await pAPI.getAllPlace();
         },
-        selectFile(file) {
-            console.log("Selected file:", file);
-            this.placeClass.selectFile(file);
+        selectFile(event) {
+            console.log("Selected file:", event.target.files[0]);
+            this.placeClass.selectFile(event.target.files[0]);
         },
 
         async submitForm() {
