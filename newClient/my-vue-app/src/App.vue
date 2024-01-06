@@ -4,36 +4,48 @@
     <v-container class="mx-auto d-flex align-center justify-center">
 
 
-      <router-link style="color: white; text-decoration: none" to="/" replace><v-row>
-          <v-img height="70" width="305" src="assets/logo1.png"></v-img> 
-          <div class="myFont" align="center">BookTrack</div>
+      <router-link style="color: white; text-decoration: none" to="/home" replace><v-row>
+          <v-img height="70" width="305" src="assets/logo1.png" ></v-img> 
         </v-row></router-link>
 
       <v-spacer></v-spacer>
 
 
-      <v-text-field model-value="Place" label="Itinerary" variant="outlined" large plain class="mx-7"></v-text-field>
+      <v-text-field model-value="Where to go?" label="Location" variant="outlined" large plain class="mx-7" ></v-text-field>
 
-      <v-btn  large plain class="mx-7">Trips</v-btn>
-      <v-btn large plain class="mx-7">Wishlist</v-btn>
-      <v-btn background-color:blue class="mx-4">Log In</v-btn>
-    </v-container>
-
-    <v-container class="mx-auto d-flex align-center justify">
-      <a class="font-weight-black text-decoration-none mx-7" href="/search-place">
-        DISCOVER PLACE
-      </a>
-
-      <a class="font-weight-black text-decoration-none mx-7" href="/search-itinerary">
-        XPLORE ITINERARY
-      </a>
-
-    </v-container>
-        
-    <div><router-view :key="$route.path"></router-view></div>
-    <v-col>
+      <v-btn
+      href="/search-place"
+  large
+  plain
+  class="mx-7"
+  style="background-color: white; color: black; transition: box-shadow 0.3s;border-radius: 999px;"
+  @mouseover="hover = true"
+  @mouseleave="hover = false"
+  :style="{ 'box-shadow': hover ? '0 0 10px rgba(0, 0, 0, 0.5)' : 'none' }"
+>
+<p class="font-weight-bold">
+    Place
+    </p>
+</v-btn>
       
-    </v-col>
+<v-btn
+      href="/search-place"
+  large
+  plain
+  class="mx-7"
+  style="background-color: white; color: black; transition: box-shadow 0.3s;border-radius: 999px;"
+  @mouseover="hover = true"
+  @mouseleave="hover = false"
+  :style="{ 'box-shadow': hover ? '0 0 10px rgba(0, 0, 0, 0.5)' : 'none' }"
+>
+<p class="font-weight-bold">
+    Itinerary
+    </p>
+</v-btn>
+    </v-container>
+    <div><router-view :key="$route.path"></router-view></div>
+   
+<v-row> </v-row>
 
     <v-card>
     <div class="d-flex align-center justify-center flex-column my-7">
@@ -99,6 +111,8 @@
     </v-main>
   </v-layout>
 </template> -->
+
+
 
 <script>
 export default {

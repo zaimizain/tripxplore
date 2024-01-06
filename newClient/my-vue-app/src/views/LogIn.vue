@@ -3,5 +3,17 @@ import { SignIn } from 'vue-clerk'
 </script>
 
 <template>
-  <SignIn signUpUrl="/signup"/>
+  <div class="center-container">
+    
+    <SignIn  redirectUrl="/home"/>
+    
+  </div>
 </template>
+
+<style scoped>
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

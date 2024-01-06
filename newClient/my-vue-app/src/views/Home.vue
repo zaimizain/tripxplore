@@ -1,49 +1,44 @@
-<script setup >
 
-</script>
 
 <template>
   <div>
   <v-container class="mx-auto justify-center">
-
-    <v-btn type="submit" href="/userUI">Submit</v-btn>
     
     <v-row>
       <v-col>
-        <v-sheet class="pa-2 ma-2">
-          <h3>BEST DESTINATIONS AROUND THE WORLD </h3>
-          <h1>Travel, enjoy
-            and live a new
-            and full life</h1>
-          <h5>Built Wicket longer admire do barton vanity itself do in it. Preferred to sportsmen it engrossed listening.
-            Park gate sell they west hard for the.</h5>
+        <v-sheet >
+          <v-card-text class="text-h3 text-lg-h3"  style="color: #1f1f1f"><b>Best Destinations Around The World!</b></v-card-text> 
+          <v-card-text class="text-h5"  style="color: #1f1f1f">Travel, enjoy, live a new and full life</v-card-text> 
 
-          <v-btn> Explore now</v-btn>
 
+          <v-btn href="/" large plain class="mx-3" style="background-color: #a88a5e; color: #1d1d1d; transition: box-shadow 0.3s;border-radius: 999px;"> <p class="font-weight-bold">Explore Now</p></v-btn>
         </v-sheet>
 
       </v-col>
 
-        <v-sheet class="pa-2 ma-2" justify-end>
-          <v-img height="600" width="800" src="assets/wall1.jpg" class="mx-4 my-4"></v-img>
+        <v-sheet  justify-end>
+          <v-img height="500" width="700" src="assets/wall1.jpg" class="mx-13 "></v-img>
         </v-sheet>
 
 
     </v-row>
 
-    <v-row class="pa-2 ma-2 my-4">
+    <v-row  class="pa-1 ma-1 ">
       <v-row>
         <v-col>
         <v-sheet>
-          <h1 class="my-3">MY PLACE</h1> <v-spacer></v-spacer> 
+          <v-card-text class="text-h4"  style="color: #262121"><b>My Place</b></v-card-text>  
+          <v-card-text class="text-h5"  style="color: #1f1f1f">Create and customize your perfect travel place with just a few clicks.</v-card-text> 
           
-          <h3 class="my-3">Create and customize your perfect travel schedule with just a few clicks.</h3>
-         
-          <v-sheet class="justify-end">
-            <router-link to="/listplaceUI"><v-btn>+</v-btn></router-link>
+        </v-sheet>
+
+      </v-col>
+      <v-col >
+          <v-sheet class="ma-5">
+            <router-link to="/listplaceUI"  > <v-btn large plain class="mx-3" style="background-color: #a88a5e; color: #1d1d1d; transition: box-shadow 0.3s;border-radius: 999px;"> <p class="font-weight-bold">+</p></v-btn></router-link>
           </v-sheet>
-         
-          
+        </v-col>
+          <v-col>
           <v-col sm="2" class="pa-2" v-for="post in posts" :key="post._id">
             <!-- <v-card class="pa-2"  :to="{ name: 'post', params: { id: post._id } }"> -->
               <v-card class="pa-2" >
@@ -57,24 +52,30 @@
 
             </v-card>
           </v-col>
-        </v-sheet>
-      </v-col>
-      
+        </v-col>
       </v-row>
      
     </v-row>
 
 
-    <v-row class="pa-2 ma-2 my-4">
+    <v-row class="pa-1 ma-1 ">
       <v-row>
-      <v-sheet>
-        <h1>MY ITINERARY</h1>
-        <h3>Create and customize your perfect travel schedule with just a few clicks.</h3>
+        
+        <v-col>
+          <v-sheet>
+            <v-card-text class="text-h4"  style="color: #262121"><b>My Itinerary</b></v-card-text>  
+            <v-card-text class="text-h5"  style="color: #1f1f1f">Create and customize your perfect travel itinerary with just a few clicks.</v-card-text> 
 
-      </v-sheet>
-    </v-row>
-   <v-row> <v-btn href="/listitinerary">+</v-btn></v-row>
-    </v-row>
+          </v-sheet>
+        </v-col>
+       <v-col><v-sheet class="ma-5">
+            <router-link to="/listitinerary"  > <v-btn large plain class="mx-3" style="background-color: #a88a5e; color: #1d1d1d; transition: box-shadow 0.3s;border-radius: 999px;"> <p class="font-weight-bold">+</p></v-btn></router-link>
+          </v-sheet>
+        </v-col>
+     </v-row>
+   <v-row> 
+   </v-row>
+  </v-row>
   </v-container>
 </div>
 </template>

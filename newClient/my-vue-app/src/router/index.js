@@ -8,11 +8,12 @@ import PlaceDetails from '../views/PlaceDetails.vue'
 import ListItinerary from '../views/ListItinerary.vue'
 import LogIn from '../views/LogIn.vue'
 import SignUp from '../views/SignUp.vue'
+import SignOut from '../views/SignOut.vue'
 import Test from "../views/Test.vue"
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: Home
   },
@@ -22,7 +23,7 @@ const routes = [
     component: UserUI
   },
   {
-    path: '/login',
+    path: '/',
     name: 'login',
     component: LogIn
   },
@@ -30,6 +31,11 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: SignUp
+  },
+  {
+    path: '/signout',
+    name: 'signout',
+    component: SignOut
   },
   {
     path: '/dialog',
