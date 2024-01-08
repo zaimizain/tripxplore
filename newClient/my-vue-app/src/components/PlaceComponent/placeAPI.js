@@ -26,6 +26,8 @@ export default class pAPI {
         });
         return res.data;
     }
+
+    
      // to insert post into database
      static async addPlace(post){
         const res = await axios.post(url,post);

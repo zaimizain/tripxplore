@@ -21,7 +21,7 @@
     <v-card-subtitle>
        Located in {{ post.location }}
        <v-spacer></v-spacer>
-       Located in {{ post.created }}
+       Created on {{ post.created }}
     </v-card-subtitle>
 
 
@@ -33,7 +33,7 @@
 
       <v-btn
         @click="show = !show"
-      ></v-btn>
+      >></v-btn>
     </v-card-actions>
 
     <v-divider></v-divider>
@@ -51,10 +51,8 @@
         <v-card-title>What to Expect?</v-card-title>
     
           <v-spacer></v-spacer>
-    
-          <v-btn
-            @click="show2 = !show2"
-          >  </v-btn>
+          <v-btn @click="show2 = !show2">>
+</v-btn>
           
         </v-card-actions>
     
@@ -76,7 +74,7 @@
     
           <v-btn
             @click="show3 = !show3"
-          >  </v-btn>
+          > > </v-btn>
           
         </v-card-actions>
     
@@ -98,7 +96,7 @@
     
           <v-btn
             @click="show4 = !show4"
-          >  </v-btn>
+          >>  </v-btn>
           
         </v-card-actions>
     
@@ -120,7 +118,7 @@
     
           <v-btn
             @click="show5= !show5"
-          >  </v-btn>
+          >>  </v-btn>
           
         </v-card-actions>
     
@@ -144,6 +142,7 @@
      
     </v-container>
 </template>
+
 
 <script>
 import placeClass from "../components/PlaceComponent/placeClass";

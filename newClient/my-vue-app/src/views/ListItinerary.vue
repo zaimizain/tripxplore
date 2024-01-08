@@ -25,7 +25,7 @@
                 :min="startDate"
                 label="End Date"
               ></v-date-picker>
-              <v-btn @click="updateItinerary" class="mx-3" color="primary">Submit</v-btn>
+              <v-btn @click="updateItinerary" class="mx-3" color="primary">Next</v-btn>
           </v-row>
         </v-col>
       </v-row>
@@ -50,6 +50,7 @@
               </v-col>
               <v-col>
     <v-btn @click="removeCard(day, index)" color="error" style="border-radius: 20px;">-</v-btn>
+    <v-btn @click="submitForm" class="mx-3" color="primary">Submit</v-btn>
   </v-col>
             </v-row>
 
@@ -73,6 +74,8 @@ export default {
       itineraryDays: [],
       dayCards: {},
       day: " ",
+     time: " ",
+     activity: " ",
     };
   },
   methods: {
@@ -91,6 +94,33 @@ export default {
 
       this.itineraryDays = days.map((day) => day.toDateString());
     },
+
+    async submitForm() {
+    if (this.validateForm()) {
+      try {
+        const response = await axios.post('/api/itinerary', this.post);
+        // Assuming you have a method to handle the navigation or display the message
+        this.handleApiResponse(response);
+      } catch (error) {
+        // Handle error
+        console.error('Sini Error submitting form:', error);
+      }
+    }
+  },
+  handleApiResponse(response) {
+    // Check if the current route is different from the intended route
+    const currentRoute = this.router.currentRoute.name; // Access the router instance
+    const intendedRoute = "placeUI";
+
+    if (currentRoute !== intendedRoute) {
+      // Navigate to the intended route
+      this.pushRoute(intendedRoute, { message: response.message });
+    } else {
+      // Handle the response differently if you are already on the intended route
+      // For example, update the component state or display a message
+      console.log("Already on the 'placeUI' route. Handle the response here:", response);
+    }
+  },
     
     addCard(day) {
     // Ensure the day has an array to store cards
@@ -119,6 +149,8 @@ export default {
 
       return daysArray;
     },
+
+    
   },
 };
 </script>

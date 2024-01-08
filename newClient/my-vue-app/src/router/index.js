@@ -10,6 +10,8 @@ import LogIn from '../views/LogIn.vue'
 import SignUp from '../views/SignUp.vue'
 import SignOut from '../views/SignOut.vue'
 import Test from "../views/Test.vue"
+import FirstPage from "../views/FirstPage.vue"
+import ItineraryInput from "../views/ItineraryInput.vue"
 
 const routes = [
   {
@@ -21,6 +23,16 @@ const routes = [
     path: '/userUI',
     name: 'userUI',
     component: UserUI
+  },
+  {
+    path: '/itineraryinput',
+    name: 'itineraryinput',
+    component: ItineraryInput
+  },
+  {
+    path: '/firstpage',
+    name: 'firstpage',
+    component: FirstPage
   },
   {
     path: '/',

@@ -9,7 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cagataycali/collaborative-filtering": "^1.0.2",
+    "@mdi/font": "^7.4.47",
     "axios": "^1.6.4",
+    "collaborative_filtering": "^1.0.1",
+    "content-based-recommender": "^1.5.0",
     "vue": "^3.3.11",
     "vue-clerk": "^0.1.1",
     "vue-router": "^4.2.5",

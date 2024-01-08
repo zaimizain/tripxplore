@@ -69,7 +69,7 @@
           </v-sheet>
         </v-col>
        <v-col><v-sheet class="ma-5">
-            <router-link to="/listitinerary"  > <v-btn large plain class="mx-3" style="background-color: #a88a5e; color: #1d1d1d; transition: box-shadow 0.3s;border-radius: 999px;"> <p class="font-weight-bold">+</p></v-btn></router-link>
+            <router-link to="/firstpage"  > <v-btn large plain class="mx-3" style="background-color: #a88a5e; color: #1d1d1d; transition: box-shadow 0.3s;border-radius: 999px;"> <p class="font-weight-bold">+</p></v-btn></router-link>
           </v-sheet>
         </v-col>
      </v-row>
