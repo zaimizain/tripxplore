@@ -11,10 +11,19 @@
       <v-spacer></v-spacer>
 
 
-      <v-text-field model-value="Where to go?" label="Location" variant="outlined" large plain class="mx-7" ></v-text-field>
+      <v-text-field
+        :loading="loading"
+        density="compact"
+        variant="solo"
+        label="Where to go?"
+        append-inner-icon="mdi-magnify"
+        single-line
+        hide-details
+        @click:append-inner="onClick"
+      ></v-text-field>
 
       <v-btn
-      href="/search-place"
+      href="/place"
   large
   plain
   class="mx-7"
@@ -29,7 +38,7 @@
 </v-btn>
       
 <v-btn
-      href="/search-place"
+      href="/itinerary"
   large
   plain
   class="mx-7"
@@ -115,12 +124,21 @@
 
 
 <script>
-export default {
-  data: () => ({
-    loaded: false,
-    loading: false,
-  }),
+  export default {
+    data: () => ({
+      loaded: false,
+      loading: false,
+    }),
 
-}
+    methods: {
+      onClick () {
+        this.loading = true
+
+        setTimeout(() => {
+          this.loading = false
+          this.loaded = true
+        }, 2000)
+      },
+    },
+  }
 </script>
-

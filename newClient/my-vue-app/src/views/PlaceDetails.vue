@@ -14,7 +14,6 @@
       width="700px"
       cover
     ></v-img>
-   <v-btn class="mx-3 my-2">Add to itinerary</v-btn>
    <v-card-title>
         {{ post.location }}
     </v-card-title>

@@ -23,39 +23,37 @@
 
     </v-row>
 
-    <v-row  class="pa-1 ma-1 ">
-      <v-row>
-        <v-col>
-        <v-sheet>
-          <v-card-text class="text-h4"  style="color: #262121"><b>My Place</b></v-card-text>  
-          <v-card-text class="text-h5"  style="color: #1f1f1f">Create and customize your perfect travel place with just a few clicks.</v-card-text> 
-          
-        </v-sheet>
+    <v-row class="pa-1 ma-1">
+  <v-col>
+    <v-sheet>
+      <v-card-text class="text-h4" style="color: #262121"><b>My Places</b></v-card-text>
+      <v-card-text class="text-h5" style="color: #1f1f1f">Create and customize your perfect travel places with just a few clicks.</v-card-text>
+    </v-sheet>
+  </v-col>
+  <v-col>
+    <v-sheet class="ma-5">
+      <router-link to="/listplaceUI">
+        <v-btn large plain class="mx-3" style="background-color: #a88a5e; color: #1d1d1d; transition: box-shadow 0.3s;border-radius: 999px;">
+          <p class="font-weight-bold">+</p>
+        </v-btn>
+      </router-link>
+    </v-sheet>
+  </v-col>
+</v-row>
 
-      </v-col>
-      <v-col >
-          <v-sheet class="ma-5">
-            <router-link to="/listplaceUI"  > <v-btn large plain class="mx-3" style="background-color: #a88a5e; color: #1d1d1d; transition: box-shadow 0.3s;border-radius: 999px;"> <p class="font-weight-bold">+</p></v-btn></router-link>
-          </v-sheet>
-        </v-col>
-          <v-col>
-          <v-col sm="2" class="pa-2" v-for="post in posts" :key="post._id">
-            <!-- <v-card class="pa-2"  :to="{ name: 'post', params: { id: post._id } }"> -->
-              <v-card class="pa-2" >
-              <v-img height="250" width="1900" :src="`/images/${post.image}`"></v-img>
-              <v-card-title class="headline">
-                {{ post.location }}
-              </v-card-title>
-              <v-card-text class="py-0">
-                <p>{{ post.notes.substring(0, 15) + "...See More" }}</p>
-              </v-card-text>
-
-            </v-card>
-          </v-col>
-        </v-col>
-      </v-row>
-     
-    </v-row>
+<v-row>
+  <v-col v-for="post in posts" :key="post._id" cols="12" sm="6" md="4" lg="3">
+    <v-card class="pa-2">
+      <v-img height="250" width="1900" :src="`/images/${post.image}`"></v-img>
+      <v-card-title class="headline">
+        {{ post.location }}
+      </v-card-title>
+      <v-card-text class="py-0">
+        <p>{{ post.notes.substring(0, 15) + "...See More" }}</p>
+      </v-card-text>
+    </v-card>
+  </v-col>
+</v-row>
 
 
     <v-row class="pa-1 ma-1 ">

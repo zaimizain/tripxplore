@@ -1,40 +1,37 @@
 <template>
     <v-container>
-        <!-- Add new post section -->
-        <v-row no-gutters>
-            <v-col sm="10" class="mx-auto">
-                <v-card class="pa-5">
-                    <v-card-title>Add new post</v-card-title>
-                    <v-divider></v-divider>
-                    <v-form ref="form" @submit.prevent="submitForm" class="pa-5" enctype="multipart/form-data">
-                        <!-- Your form fields here -->
-                        <v-text-field v-model="placeClass.post.activities" label="activities" prepend-icon="mdi-note"
-                            :rules="placeClass.rules"></v-text-field>
-                        <v-text-field v-model="placeClass.post.location" label="location" prepend-icon="mdi-view-list"
-                            :rules="placeClass.rules"></v-text-field>
-                            <v-text-field v-model="placeClass.post.expect" label="expect" prepend-icon="mdi-note"
-                            :rules="placeClass.rules"></v-text-field>
-                        <v-text-field v-model="placeClass.post.age" label="age" prepend-icon="mdi-view-list"
-                            :rules="placeClass.rules"></v-text-field>
-                            <v-text-field v-model="placeClass.post.notes" label="notes" prepend-icon="mdi-note"
-                            :rules="placeClass.rules"></v-text-field>
-                        <v-text-field v-model="placeClass.post.budget" label="budget" prepend-icon="mdi-view-list"
-                            :rules="placeClass.rules"></v-text-field>
-
-                            <v-file-input @change="selectFile" :rules="placeClass.rules" show-size counter multiple
-                            label="Select Image"></v-file-input>
-
-
-                        <v-btn type="submit"  class="mt-3" color="primary">Add post</v-btn>
-                    </v-form>
-                </v-card>
-            </v-col>
-        </v-row>
-
-       
-     
+      <!-- Add new post section -->
+      <v-row justify="center">
+        <v-col cols="12" sm="8" md="6">
+          <v-card class="elevation-2">
+            <v-card-title class="headline text-center">Add New Post</v-card-title>
+            <v-divider></v-divider>
+            <v-form ref="form" @submit.prevent="submitForm" class="pa-5" enctype="multipart/form-data">
+              <!-- Your form fields here -->
+              <v-text-field v-model="placeClass.post.activities" label="Activities" prepend-icon="mdi-note" outlined
+                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
+              <v-text-field v-model="placeClass.post.location" label="Location" prepend-icon="mdi-view-list" outlined
+                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
+              <v-text-field v-model="placeClass.post.expect" label="Expect" prepend-icon="mdi-note" outlined
+                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
+              <v-text-field v-model="placeClass.post.age" label="Age" prepend-icon="mdi-view-list" outlined
+                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
+              <v-text-field v-model="placeClass.post.notes" label="Notes" prepend-icon="mdi-note" outlined
+                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
+              <v-text-field v-model="placeClass.post.budget" label="Budget" prepend-icon="mdi-view-list" outlined
+                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
+  
+              <v-file-input @change="selectFile" :rules="placeClass.rules" show-size counter multiple
+                label="Select Image"></v-file-input>
+  
+              <v-btn type="submit" class="mt-4" color="primary" block>Add Post</v-btn>
+            </v-form>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
-</template>
+  </template>
+  
   
 <script>
 import placeClass from "../components/PlaceComponent/placeClass";

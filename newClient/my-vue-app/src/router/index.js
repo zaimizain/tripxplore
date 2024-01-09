@@ -12,6 +12,8 @@ import SignOut from '../views/SignOut.vue'
 import Test from "../views/Test.vue"
 import FirstPage from "../views/FirstPage.vue"
 import ItineraryInput from "../views/ItineraryInput.vue"
+import Itinerary from "../views/Itinerary.vue"
+import Place from "../views/Place.vue"
 
 const routes = [
   {
@@ -60,6 +62,11 @@ const routes = [
     component: ListItinerary
   },
   {
+    path: '/itinerary',
+    name: 'itinerary',
+    component: Itinerary
+  },
+  {
     path: '/placedetails',
     name: 'placedetails',
     component: PlaceDetails
@@ -68,6 +75,11 @@ const routes = [
     path: '/listplaceUI',
     name: 'listplaceUI',
     component: ListPlaceUI
+  },
+  {
+    path: '/place',
+    name: 'place',
+    component: Place
   },
   {
     path: '/placeUI',

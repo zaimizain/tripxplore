@@ -3,9 +3,11 @@ import { SignIn } from 'vue-clerk'
 </script>
 
 <template>
+  
+  
   <div class="center-container">
     
-    <SignIn  redirectUrl="/home"/>
+    <SignIn  signUpUrl="/signup"/>
     
   </div>
 </template>
