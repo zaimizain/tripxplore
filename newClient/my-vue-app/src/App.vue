@@ -1,10 +1,30 @@
+<script setup>
+import {ref, computed} from "vue"
+import { useAuth } from 'vue-clerk'
+import { SignOutButton } from 'vue-clerk'
+
+const {userId} = useAuth()
+
+console.log("userID:",userId.value)
+
+const isLoggedIn = computed(() => {
+  
+if(!userId.value ){
+ return false;
+}
+else{
+  return true;
+}
+})
+</script>
+
 <template>
   <v-app>
 
     <v-container class="mx-auto d-flex align-center justify-center">
 
 
-      <router-link style="color: white; text-decoration: none" to="/home" replace><v-row>
+      <router-link style="color: white; text-decoration: none" to="/" replace><v-row>
           <v-img height="70" width="305" src="assets/logo1.png" ></v-img> 
         </v-row></router-link>
 
@@ -30,7 +50,6 @@
   style="background-color: white; color: black; transition: box-shadow 0.3s;border-radius: 999px;"
   @mouseover="hover = true"
   @mouseleave="hover = false"
-  :style="{ 'box-shadow': hover ? '0 0 10px rgba(0, 0, 0, 0.5)' : 'none' }"
 >
 <p class="font-weight-bold">
     Place
@@ -45,18 +64,20 @@
   style="background-color: white; color: black; transition: box-shadow 0.3s;border-radius: 999px;"
   @mouseover="hover = true"
   @mouseleave="hover = false"
-  :style="{ 'box-shadow': hover ? '0 0 10px rgba(0, 0, 0, 0.5)' : 'none' }"
 >
 <p class="font-weight-bold">
     Itinerary
     </p>
 </v-btn>
-    </v-container>
+<v-btn v-if="!isLoggedIn"   href="/login">Login</v-btn>
+<v-btn v-else  href="/login"><SignOutButton  /></v-btn>
+<!-- <v-btn v-else  href="/signout">Logout</v-btn> -->
+</v-container>
     <div><router-view :key="$route.path"></router-view></div>
    
 <v-row> </v-row>
 
-    <v-card>
+    <!-- <v-card>
     <div class="d-flex align-center justify-center flex-column my-7">
       
         <v-row no-gutters>
@@ -101,7 +122,7 @@
       </v-row>
 
     </div>
-  </v-card>
+  </v-card> -->
   </v-app>
 </template>
 

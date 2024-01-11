@@ -4,5 +4,5 @@ import { SignOutButton } from 'vue-clerk'
 
 
 <template>
-  <SignOutButton afterSignOutUrl="/"/>
+  <SignOutButton redirectUrl="/"/>
 </template>

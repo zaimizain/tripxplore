@@ -7,7 +7,7 @@ import { SignIn } from 'vue-clerk'
   
   <div class="center-container">
     
-    <SignIn  signUpUrl="/signup"/>
+    <SignIn  signUpUrl="/signup" redirectUrl="/"/>
     
   </div>
 </template>

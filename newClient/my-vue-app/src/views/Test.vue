@@ -1,6 +1,18 @@
+<script setup>
+import { store } from '../components/PlaceComponent/test'
+</script>
+
+
 <template>
-    <h1>Test</h1>
+    <v-container>
+        <h1>test</h1>
+        <v-btn @click="store.getAllPlace()">
+      From B: {{ store.id }}
+        </v-btn>
+    </v-container>
+
 </template>
+
 <script>
 // const CF = require('@cagataycali/collaborative-filtering');
 // const pAPI = require('../components/PlaceComponent/placeAPI');

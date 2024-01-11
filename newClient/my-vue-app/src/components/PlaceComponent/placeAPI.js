@@ -1,14 +1,11 @@
 import axios from "axios";
 const url = "/api/place";
 
-
 export default class pAPI { 
 
-    constructor (auth) {
-        this.auth = auth
-    }
     // to get all the posts from the servers
     static async getAllPlace(token){
+        console.log("Token:",token)
         const res = await axios.get(url,{
             headers: {
               Authorization: `Bearer ${token}`
@@ -18,10 +15,10 @@ export default class pAPI {
 
     }
     // to get single post by id
-    static async getPlaceByID(id){
+    static async getPlaceByID(id,token){
         const res = await axios.get(`${url}/${id}`,{
             headers: {
-                Authorization: `Bearer ${ss}`
+                Authorization: `Bearer ${token}`
             }
         });
         return res.data;

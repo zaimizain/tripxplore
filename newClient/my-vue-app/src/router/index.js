@@ -17,7 +17,7 @@ import Place from "../views/Place.vue"
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: Home
   },
@@ -37,7 +37,7 @@ const routes = [
     component: FirstPage
   },
   {
-    path: '/',
+    path: '/login',
     name: 'login',
     component: LogIn
   },

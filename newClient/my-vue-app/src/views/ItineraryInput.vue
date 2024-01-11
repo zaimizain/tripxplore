@@ -16,6 +16,8 @@
               v-model="timeSlots[day - 1].time"
               id="time"
               class="w-full p-2 border rounded-md"
+              @input="debouncedLogTime"
+
             />
           </div>
           <div>
@@ -25,21 +27,28 @@
               v-model="timeSlots[day - 1].activity"
               id="activity"
               class="w-full p-2 border rounded-md"
+              @input="debouncedLogActivity"
             />
           </div>
         </div>
       </div>
     </div>
+    <div><v-btn class="my-10 justify-centered">Submit</v-btn></div>
   </div>
 </template>
 
 
 
 <script>
+import _debounce from 'lodash/debounce';
+
 export default {
   data() {
     return {
-      timeSlots: [], // Initialize as an empty array
+      day: 1,
+      timeSlots: [
+        { time: '', activity: '' }, // You may have more elements based on your requirement
+      ],
     };
   },
   computed: {
@@ -64,10 +73,41 @@ export default {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
       return dateForDay.toLocaleDateString(undefined, options);
     },
+    logTime() {
+      const timeValue = this.timeSlots[this.day - 1].time;
+      if (timeValue.length > 0 && /[a-zA-Z]/.test(timeValue)) {
+        console.log('Time:', timeValue);
+      }
+    },
+    logActivity() {
+      const activityValue = this.timeSlots[this.day - 1].activity;
+      if (activityValue.length > 0 && /[a-zA-Z]/.test(activityValue)) {
+        console.log('Activity:', activityValue);
+      }
+    },
+    debouncedLogTime: _debounce(function() {
+      this.logTime();
+    }, 1000),
+    debouncedLogActivity: _debounce(function() {
+      this.logActivity();
+    }, 1000),
   },
   created() {
     console.log('Number of days:', this.numberOfDays);
   },
+
+  async submitForm() {
+  const posts = {
+    location: this.$route.query.location,
+    itineraryName: this.$route.query.itineraryName,
+    days: this.timeSlots.map(day => ({
+      time: day.time,
+      activity: day.activity,
+    })),
+  };
+
+  console.log('Posts:', posts);
+},
 
   async createItinerary() {
     const itineraryData = {
