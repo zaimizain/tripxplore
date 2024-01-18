@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const userRoutes = require('./routes/userRoutes') 
-const { ClerkExpressWithAuth } = require('@clerk/clerk-sdk-node') 
+const { ClerkExpressRequireAuth } = require('@clerk/clerk-sdk-node') 
 
 const app = express();
 const port = process.env.PORT // 5000;
@@ -25,9 +25,12 @@ mongoose.connect(process.env.DB_URI, {
 }).then(() => console.log("Connected to the database!")).catch((err) => console.log(err));
 
 //routes prefix
-app.use("/api/place",ClerkExpressWithAuth(),require("./routes/placeRoutes"));
-app.use("/api/location",ClerkExpressWithAuth(),require("./routes/locationRoutes"));
-app.use("/api/itinerary",ClerkExpressWithAuth(),require("./routes/itineraryRoutes"));
+// app.use("/api/place",ClerkExpressRequireAuth(),require("./routes/placeRoutes"));
+// app.use("/api/location",ClerkExpressRequireAuth(),require("./routes/locationRoutes"));
+// app.use("/api/itinerary",ClerkExpressRequireAuth(),require("./routes/itineraryRoutes"));
+app.use("/api/place",require("./routes/placeRoutes"));
+app.use("/api/location",require("./routes/locationRoutes"));
+app.use("/api/itinerary",require("./routes/itineraryRoutes"));
 
 
 // start server

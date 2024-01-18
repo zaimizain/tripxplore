@@ -1,79 +1,208 @@
 <template>
-    <div class="itinerary-form">
-      <label for="location">Location</label>
-      <input id="location" v-model="location" placeholder="Enter location">
-  
-      <label for="itineraryName">Itinerary Name</label>
-      <input id="itineraryName" v-model="itineraryName" placeholder="Enter itinerary name">
-  
-      <label for="startDate">Start Date</label>
-      <input id="startDate" type="date" v-model="startDate">
-  
-      <label for="endDate">End Date</label>
-      <input id="endDate" type="date" v-model="endDate">
-  
-      <button @click="createItinerary">Create</button>
+  <div class="day-planner">
+    <h1>Create a New Itinerary</h1>
+
+    <div class="date-picker">
+      Location:
+      <v-text-field class="my-3"  for="location" label="Insert location" id="location" type="text" density="compact" variant="solo" 
+        single-line v-model="location" ></v-text-field>
+        
+        Itinerary Name:
+        <v-text-field class="my-2"  for="itineraryName" label="Insert Itinerary Name" id="itineraryName" type="text" density="compact" variant="solo" 
+        single-line v-model="itineraryName" ></v-text-field>
+       
     </div>
-  </template>
-  
-  <style scoped>
-    .itinerary-form {
-      max-width: 400px;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-  
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-      color: #333;
-    }
-  
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-  
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-  
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
-  
+
+    <div class="date-picker">
+
+      Start Date:
+        <v-text-field class="my-2"  for="startDate" id="startDate" type="date" density="compact" variant="solo" 
+        single-line v-model="startDate" ></v-text-field>
+
+      End Date:
+        <v-text-field class="my-2"  for="endDate" id="endDate" type="date" density="compact" variant="solo" 
+        single-line v-model="endDate" ></v-text-field>
+    </div>
+
+    <!-- Generate cards for each day -->
+    <div v-for="(day, dayIndex) in dateRange" :key="dayIndex" class="day-card">
+      <h2>{{ formatReadableDate(day.date) }}</h2>
+      <div v-for="(activity, activityIndex) in day.activities" :key="activityIndex" class="activity-inputs">
+        <label for="time">Time:</label>
+        <input id="time" type="time" v-model="activity.time" />
+        <label for="activity">Activity:</label>
+        <input id="activity" type="text" v-model="activity.activity" />
+      </div>
+      <v-btn @click="addActivity(day)" class="btn add-activity mx-2">Add Activity</v-btn>
+    </div>
+    
+    <v-btn @click="saveAllDays()" href="/test2" class="btn save-day">Save All Days</v-btn>
+
+  </div>
+</template>
 
 <script>
-export default {
-  methods: {
-    createItinerary() {
-      console.log(this.location, this.itineraryName, this.startDate, this.endDate);
+import axios from "axios";
+const url = "/api/itinerary";
 
-      this.$router.push({
-        name: 'itineraryinput',
-        query: {
-          location: this.location,
-          itineraryName: this.itineraryName,
-          startDate: this.startDate,
-          endDate: this.endDate,
-        },
-      });
+async function validateDayData(dayData) {
+  const { location, itineraryName, newDay } = dayData;
+
+  if (!location || !itineraryName || !newDay) {
+    throw new Error("Incomplete day data. Ensure all required properties are provided.");
+  }
+
+  // Add any additional validation logic here
+
+  // Example: Ensure activities is an array
+  if (!Array.isArray(newDay) || newDay.length === 0 || !newDay[0].date || !newDay[0].activities) {
+    throw new Error("Invalid structure for newDay. Ensure it has date and activities.");
+  }
+}
+
+export default {
+  data() {
+    return {
+      location:"",
+      itineraryName: " ",
+      startDate: "",
+      endDate: "",
+      newDay: [],
+    };
+  },
+  computed: {
+    // Generate an array of dates between start and end dates
+    dateRange() {
+      const start = new Date(this.startDate);
+      const end = new Date(this.endDate);
+      const days = [];
+
+      for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
+        days.push({
+          date: new Date(date),
+          activities: [{ time: "", activity: "" }],
+        });
+      }
+     
+
+      return days;
+    },
+  },
+  methods: {
+    addActivity(day) {
+      day.activities.push({ time: "", activity: "" });
+    },
+    
+    async saveAllDays() {
+  try {
+    const daysData = {
+      location: this.location,
+      itineraryName: this.itineraryName,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      newDay: this.dateRange.map((day) => ({
+        date: formatDate(day.date),
+        activities: day.activities.map((activity) => ({
+          time: activity.time,
+          activity: activity.activity,
+        })),
+      })),
+    };
+
+    // Validate and save the entire itinerary
+    await validateDayData(daysData);
+    console.log(daysData);
+
+    // Save the entire itinerary
+    const response = await axios.post(url, daysData);
+    console.log("Itinerary saved:", response.data);
+
+    // Optionally, you can reset the form or handle success in another way.
+  } catch (error) {
+    console.error("Error saving itinerary:", error);
+  }
+}
+,
+
+    
+    formatReadableDate(date) {
+      const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+      return formatDate(date, options);
     },
   },
 };
+
+function formatDate(date, options) {
+  const pad = (num) => (num < 10 ? "0" + num : num);
+  return pad(date.getDate()) + "/" + pad(date.getMonth() + 1) + "/" + date.getFullYear();
+}
 </script>
+
+
+
+<style scoped>
+.day-planner {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.date-picker {
+  margin-bottom: 20px;
+}
+
+.day-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.day-card h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.activity-inputs {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+input {
+  width: calc(100% - 16px);
+  padding: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.add-activity {
+  background-color: #4caf50;
+}
+
+.save-day {
+  background-color: #3498db;
+}
+</style>

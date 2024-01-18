@@ -29,6 +29,7 @@ module.exports = class lAPI {
       const post = req.body;
       try {
           await Location.create(post);
+          console.log(post);
           res.status(201).json({message: 'Post created successfully'})
       } catch(err){
           

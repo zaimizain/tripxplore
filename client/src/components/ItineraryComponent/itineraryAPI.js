@@ -13,10 +13,23 @@ export default class lAPI {
         return res.data;
     }
      // to insert post into database
-     static async addItinerary(post){
-        const res = await axios.post(url,post);
-        return res.data;
-    }
+     static async addItinerary(posts) {
+        try {
+          // Check if 'posts' is an array
+          if (Array.isArray(posts)) {
+            // If 'posts' is an array, assume multiple itinerary posts
+            const res = await axios.post(url, posts);
+            return res.data;
+          } else {
+            // If 'posts' is not an array, assume a single itinerary post
+            const res = await axios.post(url, [posts]);
+            return res.data;
+          }
+        } catch (error) {
+          console.error(error);
+          throw error; // Re-throw the error for further handling in the calling code
+        }
+      }
      // to update post into database
      static async updateItinerary(id,post){
         const res = await axios.patch(`${url}/${id}`,post);

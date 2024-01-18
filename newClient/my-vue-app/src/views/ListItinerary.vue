@@ -110,7 +110,7 @@ export default {
   handleApiResponse(response) {
     // Check if the current route is different from the intended route
     const currentRoute = this.router.currentRoute.name; // Access the router instance
-    const intendedRoute = "placeUI";
+    const intendedRoute = "home";
 
     if (currentRoute !== intendedRoute) {
       // Navigate to the intended route

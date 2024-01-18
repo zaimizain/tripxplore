@@ -3,29 +3,24 @@ import Home from '../views/Home.vue'
 import UserUI from '../views/UserUI.vue'
 import PlaceUI from '../views/PlaceUI.vue'
 import ListPlaceUI from '../views/ListPlaceUI.vue'
-import Dialog from '../views/Dialog.vue'
 import PlaceDetails from '../views/PlaceDetails.vue'
 import ListItinerary from '../views/ListItinerary.vue'
 import LogIn from '../views/LogIn.vue'
 import SignUp from '../views/SignUp.vue'
 import SignOut from '../views/SignOut.vue'
 import Test from "../views/Test.vue"
+import Test2 from "../views/Test2.vue"
 import FirstPage from "../views/FirstPage.vue"
 import ItineraryInput from "../views/ItineraryInput.vue"
 import Itinerary from "../views/Itinerary.vue"
 import Place from "../views/Place.vue"
-
 const routes = [
   {
     path: '/',
     name: 'home',
     component: Home
   },
-  {
-    path: '/userUI',
-    name: 'userUI',
-    component: UserUI
-  },
+  
   {
     path: '/itineraryinput',
     name: 'itineraryinput',
@@ -50,11 +45,6 @@ const routes = [
     path: '/signout',
     name: 'signout',
     component: SignOut
-  },
-  {
-    path: '/dialog',
-    name: 'dialog',
-    component: Dialog
   },
   {
     path: '/listitinerary',
@@ -85,10 +75,16 @@ const routes = [
     path: '/placeUI',
     name: 'placeUI',
     component: PlaceUI
-  },{
+  },
+  {
     path: "/test",
     name: "Test",
     component: Test
+  },
+  {
+    path: "/test2",
+    name: "Test2",
+    component: Test2
   }
 ]
 

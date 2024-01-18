@@ -42,8 +42,7 @@ export default {
         const router = this.$router; // Store the router instance in a variable
         const validateForm = () => this.$refs.form.validate();
         const pushRoute = (routeName, params) => this.$router.push({ name: routeName, params });
-        console.log("hi")
-        console.log("Hello "+this.$route.params.location)
+       
 
         return {
             placeClass: new placeClass({ validateForm, pushRoute, router }),

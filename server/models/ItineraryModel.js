@@ -1,33 +1,56 @@
+// models/Day.js
 const mongoose = require('mongoose');
 
-const itinerarySchema = mongoose.Schema({
-  startDate: Date,
-  endDate: Date,
-  activity:String,
-  location:String,
-  created: {
-    type: Date,
-    default: Date.now
-  }
+const itinerarySchema = new mongoose.Schema({
+  
+ 
+    location: { 
+      type: String, 
+      required: true },
+
+      itineraryName: { 
+        type: String, 
+        required: true },
+
+  startDate: { 
+    type: Date, 
+    required: true },
+
+    endDate: { 
+      type: Date,
+      required: true },
+ 
+  newDay: [{
+    date: { 
+    type: Date, 
+    required: true },
+  
+    activities: [
+      {
+        time: { 
+          type: String, 
+          required: true },
+  
+        activity: { 
+          type: String, 
+          required: true },
+      },
+    ]}] ,
 });
 
-// Customize the JSON serialization to format the date as required
 itinerarySchema.set('toJSON', {
-  transform: function (doc, ret) {
-    ret.startDate = formatDate(ret.startDate);
-    ret.endDate = formatDate(ret.endDate);
-    ret.time = formatDate(ret.time);
-    ret.created = formatDate(ret.created);
-    return ret;
-  }
-});
+    transform: function (doc, ret) {
+      ret.created = formatDate(ret.created);
+      return ret;
+    }
+  });
 
 function formatDate(date) {
-  if (date instanceof Date) {
-    return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
-      ', ' + date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    if (date instanceof Date) {
+      return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+        ', ' + date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    }
+    return date; // Return as is if not a valid date
   }
-  return date; // Return as is if not a valid date
-}
 
-module.exports = mongoose.model("Itinerary", itinerarySchema);
+module.exports = mongoose.model('Itinerary', itinerarySchema);
