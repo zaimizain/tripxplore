@@ -67,7 +67,7 @@ else{
    
 <v-row> </v-row>
 
-    <!-- <v-card>
+    <!-- <v-card color="yellow">
     <div class="d-flex align-center justify-center flex-column my-7">
       
         <v-row no-gutters>

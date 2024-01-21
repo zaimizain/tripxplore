@@ -25,12 +25,12 @@ mongoose.connect(process.env.DB_URI, {
 }).then(() => console.log("Connected to the database!")).catch((err) => console.log(err));
 
 //routes prefix
-// app.use("/api/place",ClerkExpressRequireAuth(),require("./routes/placeRoutes"));
-// app.use("/api/location",ClerkExpressRequireAuth(),require("./routes/locationRoutes"));
-// app.use("/api/itinerary",ClerkExpressRequireAuth(),require("./routes/itineraryRoutes"));
-app.use("/api/place",require("./routes/placeRoutes"));
-app.use("/api/location",require("./routes/locationRoutes"));
-app.use("/api/itinerary",require("./routes/itineraryRoutes"));
+app.use("/api/place",ClerkExpressRequireAuth(),require("./routes/placeRoutes"));
+app.use("/api/location",ClerkExpressRequireAuth(),require("./routes/locationRoutes"));
+app.use("/api/itinerary",ClerkExpressRequireAuth(),require("./routes/itineraryRoutes"));
+// app.use("/api/place",require("./routes/placeRoutes"));
+// app.use("/api/location",require("./routes/locationRoutes"));
+// app.use("/api/itinerary",require("./routes/itineraryRoutes"));
 
 
 // start server
