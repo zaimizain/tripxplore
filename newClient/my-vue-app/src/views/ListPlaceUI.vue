@@ -2,62 +2,39 @@
     <v-container>
         <!-- Add new post section -->
         <v-row no-gutters>
-            
             <v-row no-gutters> </v-row>
- 
-          
-          <v-btn class="mx-3 my-3" @click="openDialog">+</v-btn>
-
-
-          <v-dialog v-model="dialog" max-width="600px">
-        <v-card>
-          <v-card-title>
-            <span class="headline">Insert Location</span>
-          </v-card-title>
-          <v-form ref="form" @submit.prevent="submitForm" class="pa-5" enctype="multipart/form-data">      <v-card-text>
-            <!-- Location Textfield -->
-            <v-text-field v-model="locationClass.post.location" :rules="locationClass.rules" label="Location"></v-text-field>
-            <!-- Place Textfield -->
-            <v-text-field v-model="locationClass.post.placeName" :rules="locationClass.rules" label="Place Name"></v-text-field>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn @click="closeDialog" color="error">Cancel</v-btn>
-            <v-btn @click="submitForm"  color="primary">Save</v-btn>
-          </v-card-actions>
-        </v-form>
-    
-        </v-card>
-      </v-dialog>
-  
-            
+            <v-btn large plain class="mx-3" icon="mdi-plus" size="small" href="/placeUI"
+                  style="background-color: #a88a5e; color: #1d1d1d; transition: box-shadow 0.3s;border-radius: 999px;">
+            </v-btn>
         </v-row>
-        
-
         <v-sheet>
-
- 
-
-<v-col class="pa-2" v-for="post in posts" :key="post._id">
-    <v-card href="/placedetails">
-    <v-card  class="mx-auto myp4" height="200" width="1000" :to="{  params: { id: post._id } }">
-        
-        <v-row> 
-        <img  height="200" width="300" :src="`/images/${post.image}`" />
-     
-       <v-col><b class="text-h5">{{ post.location }} </b> 
-        <v-col>{{ post.notes }}</v-col> <v-col>Located in {{ post.location }}</v-col></v-col>
-       
-        <v-btn color="red" text @click="removePost(post._id)">Delete</v-btn>
-   
-        </v-row>
-    </v-card>
-    </v-card>
-
-    
-    
-</v-col>
-</v-sheet>
-     
+            <v-col class="pa-2" v-for="post in posts" :key="post._id">
+                <v-card class="mx-auto" height="169" width="1000" :to="{ params: { id: post._id } }">
+                    <v-row class="mx-0"> 
+                        <router-link :to="{ name: 'placedetails', params: { id: post._id } }">
+                            <img class="custom-image" :src="`/images/${post.image}`" />
+                        </router-link>
+                        <v-col class="my-2 mx-3">
+                            <b class="text-h6">
+                                {{ post.activities }}
+                            </b>
+                            <v-col>
+                                <v-icon class="mx-2">mdi-map-marker</v-icon>Located in {{ post.location }}
+                                <div>
+                                    <v-icon class="mx-2">mdi-cash</v-icon>RM{{ post.budget }}
+                                </div>
+                                <div>
+                                    <v-icon class="mx-2">mdi-human-female-boy</v-icon>{{ post.age }}
+                                </div>
+                                
+                            </v-col>
+                        </v-col>
+                        <v-btn class="my-6 mx-0" icon="mdi-file-document-edit" size="small" :to="{name: 'updateplace', params: {id: post._id}}"></v-btn>
+                        <v-btn class="my-6 mx-2" icon="mdi-delete-empty" size="small" @click="removePost(post._id)"></v-btn>
+                    </v-row>
+                </v-card>
+            </v-col>
+        </v-sheet>
     </v-container>
 </template>
 
@@ -129,6 +106,13 @@ export default {
             // After deleting, fetch posts again to update the list
             this.fetchPosts();
         },
+        async updatePost(id) {
+            const response = await pAPI.updatePlace(id);
+            // Assuming you have a method to handle the navigation or display the message
+            this.handleApiResponse(response);
+            // After deleting, fetch posts again to update the list
+            this.fetchPosts();
+        },
 
         handleApiResponse(response) {
             // Check if the current route is different from the intended route
@@ -155,6 +139,12 @@ export default {
 };
 </script>
   
-  
+<style >
+.custom-image {
+  height: 200px; /* Set your desired height */
+  width: 300px; /* Ensures the width adjusts according to the height */
+  object-fit: cover; /* Maintains aspect ratio and covers the entire container */
+}
+</style>
 
   

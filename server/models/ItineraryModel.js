@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 
 const itinerarySchema = new mongoose.Schema({
   
+  // image: { 
+  //   type: String, 
+  //   required: true },
  
     location: { 
       type: String, 
@@ -34,6 +37,30 @@ const itinerarySchema = new mongoose.Schema({
         activity: { 
           type: String, 
           required: true },
+
+          expect: { 
+            type: String, 
+            required: true },
+
+            age: { 
+              type: String, 
+              required: true },
+
+              locationDetails: { 
+                type: String, 
+                required: true },
+
+                note: { 
+                  type: String, 
+                  required: true },
+
+                  budget: { 
+                    type: String, 
+                    required: true },
+
+          // image: { 
+          //   type: String, 
+          //   required: true },
       },
     ]}] ,
 });

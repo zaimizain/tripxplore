@@ -4,27 +4,32 @@
       <v-row justify="center">
         <v-col cols="12" sm="8" md="6">
           <v-card class="elevation-2">
-            <v-card-title class="headline text-center">Add New Post</v-card-title>
+            <v-card-title class=" text-center">Add New Place</v-card-title>
             <v-divider></v-divider>
             <v-form ref="form" @submit.prevent="submitForm" class="pa-5" enctype="multipart/form-data">
               <!-- Your form fields here -->
               <v-text-field v-model="placeClass.post.activities" label="Activities" prepend-icon="mdi-note" outlined
-                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
-              <v-text-field v-model="placeClass.post.location" label="Location" prepend-icon="mdi-view-list" outlined
-                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
-              <v-text-field v-model="placeClass.post.expect" label="Expect" prepend-icon="mdi-note" outlined
-                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
-              <v-text-field v-model="placeClass.post.age" label="Age" prepend-icon="mdi-view-list" outlined
-                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
-              <v-text-field v-model="placeClass.post.notes" label="Notes" prepend-icon="mdi-note" outlined
-                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
-              <v-text-field v-model="placeClass.post.budget" label="Budget" prepend-icon="mdi-view-list" outlined
-                :rules="placeClass.rules" class="custom-text-field"></v-text-field>
+                :rules="placeClass.rules" class="my-5"  density="compact" variant="solo" single-line hide-details></v-text-field>
+              <v-text-field v-model="placeClass.post.location" label="Location" prepend-icon="mdi-map-marker" outlined
+                :rules="placeClass.rules" class="my-5"  density="compact" variant="solo" single-line hide-details></v-text-field>
+              <v-text-field v-model="placeClass.post.expect" label="Expect" prepend-icon="mdi-account-question" outlined
+                :rules="placeClass.rules" class="my-5"  density="compact" variant="solo" single-line hide-details></v-text-field>
+              <v-text-field v-model="placeClass.post.age" label="Age Restriction" prepend-icon="mdi-human-child" outlined
+                :rules="placeClass.rules" class="my-5"  density="compact" variant="solo" single-line hide-details></v-text-field>
+              <v-text-field v-model="placeClass.post.notes" label="Notes" prepend-icon="mdi-note-text" outlined
+                :rules="placeClass.rules" class="my-5"  density="compact" variant="solo" single-line hide-details></v-text-field>
+              <v-text-field v-model="placeClass.post.budget" label="Budget" prepend-icon="mdi-currency-usd" outlined
+                :rules="placeClass.rules" class="my-5"  density="compact" variant="solo" single-line hide-details></v-text-field>
   
-              <v-file-input @change="selectFile" :rules="placeClass.rules" show-size counter multiple
-                label="Select Image"></v-file-input>
+              <v-file-input prepend-icon="mdi-image-plus" @change="selectFile" :rules="placeClass.rules" show-size counter multiple
+                label="Select Image" class="my-5"  density="compact" variant="solo" single-line hide-details></v-file-input>
   
-              <v-btn type="submit" class="mt-4" color="primary" block>Add Post</v-btn>
+                <v-row justify="center" >
+              <v-btn type="submit"
+                color="primary"
+                rounded
+                >Create</v-btn>
+            </v-row>
             </v-form>
           </v-card>
         </v-col>
@@ -81,7 +86,6 @@ export default {
 
             // Fetch posts again to update the list
             this.fetchPosts();
-
             // Optionally, display a success message or update component state
             console.log("Form submitted successfully!");
         } else {

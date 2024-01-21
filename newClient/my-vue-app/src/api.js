@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "/api/test";
+const url = "/api/place";
 
 export default class API { 
     // to get all the posts from the servers

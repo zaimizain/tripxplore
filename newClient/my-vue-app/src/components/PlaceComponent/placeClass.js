@@ -46,9 +46,22 @@ class placeClass {
     }
   }
 
-  
+  async updateForm(id) {
+    const formData = new FormData();
+    formData.append("activities", this.post.activities);
+    formData.append("location", this.post.location);
+    formData.append("expect", this.post.expect);
+    formData.append("age", this.post.age);
+    formData.append("notes", this.post.notes);
+    formData.append("budget", this.post.budget);
+    formData.append("old_image", this.post.image);
+    if (this.validateForm()) {
+      const response = await pAPI.updatePlace(id,formData);
+      // Assuming you have a method to handle the navigation or display the message
+     
+    }
+  }
 
-  
   handleApiResponse(response) {
     // Check if the current route is different from the intended route
     const currentRoute = this.router.currentRoute.name; // Access the router instance
@@ -63,6 +76,8 @@ class placeClass {
       console.log("Already on the 'placeUI' route. Handle the response here:", response);
     }
   }
+
+  
 }
 
 export default placeClass;

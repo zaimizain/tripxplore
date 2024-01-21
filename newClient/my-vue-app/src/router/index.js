@@ -11,9 +11,11 @@ import SignOut from '../views/SignOut.vue'
 import Test from "../views/Test.vue"
 import Test2 from "../views/Test2.vue"
 import FirstPage from "../views/FirstPage.vue"
-import ItineraryInput from "../views/ItineraryInput.vue"
 import Itinerary from "../views/Itinerary.vue"
 import Place from "../views/Place.vue"
+import updatePlace from "../views/updatePlace.vue"
+import updateItinerary from "../views/updateItinerary.vue"
+
 const routes = [
   {
     path: '/',
@@ -21,11 +23,7 @@ const routes = [
     component: Home
   },
   
-  {
-    path: '/itineraryinput',
-    name: 'itineraryinput',
-    component: ItineraryInput
-  },
+  
   {
     path: '/firstpage',
     name: 'firstpage',
@@ -57,7 +55,7 @@ const routes = [
     component: Itinerary
   },
   {
-    path: '/placedetails',
+    path: '/placedetails/:id',
     name: 'placedetails',
     component: PlaceDetails
   },
@@ -72,6 +70,16 @@ const routes = [
     component: Place
   },
   {
+    path: '/updateplace/:id',
+    name: 'updateplace',
+    component: updatePlace
+  },
+  {
+    path: '/updateitinerary/:id',
+    name: 'updateitinerary',
+    component: updateItinerary
+  },
+  {
     path: '/placeUI',
     name: 'placeUI',
     component: PlaceUI
@@ -83,7 +91,7 @@ const routes = [
   },
   {
     path: "/test2",
-    name: "Test2",
+    name: "test2",
     component: Test2
   }
 ]
