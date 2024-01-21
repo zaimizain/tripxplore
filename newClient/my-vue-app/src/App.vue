@@ -21,57 +21,48 @@ else{
 <template>
   <v-app>
 
-    <v-container class="mx-auto d-flex align-center justify-center">
+    <v-container class="mx-auto d-flex align-center justify-center " >
+  <router-link style="color: white; text-decoration: none" to="/" replace>
+    <v-row>
+      <v-img height="70" width="305" src="assets/logo1.png"></v-img>
+    </v-row>
+  </router-link>
 
+  <v-spacer></v-spacer>
 
-      <router-link style="color: white; text-decoration: none" to="/" replace><v-row>
-          <v-img height="70" width="305" src="assets/logo1.png" ></v-img> 
-        </v-row></router-link>
+  <v-btn
+    href="/place"
+    large
+    plain
+    class="mx-0"
+    style="background-color: white; color: black; border-radius: 999px; box-shadow: none; text-transform: none;font-size: 20px;"
+    @mouseover="hover = true"
+    @mouseleave="hover = false"
+  >
+    <v-icon class="mx-1">mdi-map-marker-radius</v-icon>
+   Place
+  </v-btn>
 
-      <v-spacer></v-spacer>
+  <v-btn
+    href="/itinerary"
+    large
+    plain
+    class="mx-0"
+    style="background-color: white; color: black; border-radius: 999px; box-shadow: none; text-transform: none;font-size: 20px;"
+    @mouseover="hover = true"
+    @mouseleave="hover = false"
+  >
+    <v-icon class="mx-1">mdi-map-marker-distance</v-icon>
+    Itinerary
+  </v-btn>
 
+  <v-spacer></v-spacer>
 
-      <v-text-field
-      class="mx-5"
-        :loading="loading"
-        density="compact"
-        variant="solo"
-        label="Where to go?"
-        append-inner-icon="mdi-magnify"
-        single-line
-        hide-details
-        @click:append-inner="onClick"
-      ></v-text-field>
-
-      <v-btn
-  href="/place"
-  large
-  plain
-  class="mx-0"
-  style="background-color: white; color: black; border-radius: 999px; box-shadow: none; text-transform: none;font-family: 'Poppins', sans-serif;"
-  @mouseover="hover = true"
-  @mouseleave="hover = false"
->
-  <v-icon class="mx-1">mdi-map-marker-radius</v-icon>
-  Place
-</v-btn>
-      
-<v-btn
-  href="/itinerary"
-  large
-  plain
-  class="mx-0"
-  style="background-color: white; color: black; border-radius: 999px; box-shadow: none; text-transform: none;font-family: 'Poppins', sans-serif;"
-  @mouseover="hover = true"
-  @mouseleave="hover = false"
->
-  <v-icon class="mx-1">mdi-map-marker-distance</v-icon>
-  Itinerary
-</v-btn>
-<v-btn v-if="!isLoggedIn"   href="/login" class="mx-1" icon="mdi-login" size="small" color="indigo"></v-btn>
+  <v-btn v-if="!isLoggedIn"   href="/login" class="mx-1" icon="mdi-login" size="small" color="indigo"></v-btn>
 <v-btn v-else  href="/login" ><SignOutButton  /></v-btn>
-<!-- <v-btn v-else  href="/signout">Logout</v-btn> -->
+
 </v-container>
+
     <div><router-view :key="$route.path"></router-view></div>
    
 <v-row> </v-row>

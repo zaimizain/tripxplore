@@ -1,7 +1,13 @@
 <template>
   <v-container class="mx-auto justify-center">
-    <v-card-text class="text-h4 text-lg-h4"  style="color: #1f1f1f"><b>List Of Interesting Place</b></v-card-text> 
+    <v-card-text class="text-h4 pa-0 my-4"  style="color: #1f1f1f"><b>List Of Interesting Place</b></v-card-text> 
     
+   
+
+    <v-text-field density="compact" variant="solo" label="Where to go?" append-inner-icon="mdi-magnify" class="my-2"
+      single-line hide-details v-model="searchText" @input="filterPosts" @click:append-inner="onClick" style="max-width: 300px;"
+      ></v-text-field>
+
     <v-row>
         <v-col v-for="postx in postss" :key="postx._id" cols="12" sm="6" md="4" lg="3">
           <v-card class="pa-2 my-5">
@@ -46,7 +52,9 @@ export default {
     return {
       // placeClass: new placeClass({ router }),
       // locationClass: new locationClass({ validateForm, pushRoute, router }),
+      originalPosts: [],
       postss: [],
+      searchText: "", // Add this line
     };
   },
 
@@ -59,6 +67,20 @@ export default {
   methods: {
     async fetchPosts() {
       this.postss = await pAPI.getAllPlace();
+      this.originalPosts = [...this.postss]; // Copy the original list
+ 
+    },
+    filterPosts() {
+      const searchText = this.searchText.toLowerCase();
+
+      this.postss = this.originalPosts.filter((post) => {
+        const location = post.location.toLowerCase();
+        const activities = post.activities.toLowerCase();
+
+        return (
+          location.includes(searchText) || activities.includes(searchText)
+        );
+      });
     },
 
 

@@ -42,7 +42,7 @@
     <input id="note" type="text" v-model="day.currentActivity.note" />
     <label for="budget">Budget: RM</label>
     <input id="budget" type="text" v-model="day.currentActivity.budget" />
-    <v-btn @click="addActivity(day)" class="btn add-activity mx-2">Add Activity</v-btn>
+    <v-btn @click="addActivity(day)" class="btn add-activity mx-2 " >Add Activity</v-btn>
   </div>
 
   <div v-if="activities.length > 0" class="new-activities">

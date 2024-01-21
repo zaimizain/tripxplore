@@ -59,7 +59,7 @@
             <v-card-text class="py-0">
               <p><v-icon class="mx-2" size="small">mdi-map-marker</v-icon>{{ postx.location }}</p>
               <p><v-icon class="mx-2" size="small">mdi-human-female-boy</v-icon>{{ postx.age }}</p>
-              <p><v-icon class="mx-2" size="small">mdi-cash</v-icon>RM{{ postx.budget }}</p>
+              <p><v-icon class="mx-2" size="small">mdi-cash</v-icon>{{ postx.budget }}</p>
 
             </v-card-text>
           </v-card>

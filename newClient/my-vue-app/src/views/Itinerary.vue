@@ -2,14 +2,16 @@
 <template>
  
   
-
+ <v-container class="mx-auto justify-center">
   <div class="post-container">
    
    
       
       <v-card-text class="text-h4 text-lg-h4"  style="color: #1f1f1f"><b>List Of Famous Itinerary</b></v-card-text> 
     
-   
+      <v-text-field density="compact" variant="solo" label="Where to go?" append-inner-icon="mdi-magnify" class="my-2"
+      single-line hide-details v-model="searchText" @input="filterPosts" @click:append-inner="onClick" style="max-width: 300px;"
+      ></v-text-field>
   
 
     <v-row>
@@ -53,6 +55,7 @@
     </v-col>
   </v-row>
   </div>
+</v-container>
 </template>
 
 
@@ -63,7 +66,9 @@ import { useAuth } from "vue-clerk"
 export default {
   data() {
     return {
+      originalPosts: [],
       posts: [],
+      searchText: "", // Add this line
     };
   },
   async created() {
@@ -75,6 +80,7 @@ export default {
      async fetchPosts(token){
 
         this.posts = await iAPI.getAllItinerary(token);
+        this.originalPosts = [...this.posts]; // Copy the original list
     },
     async removeItinerary(id) {
             const response = await iAPI.deleteItinerary(id);
@@ -89,6 +95,18 @@ export default {
       const month = ('0' + (formattedDate.getMonth() + 1)).slice(-2);
       const year = formattedDate.getFullYear();
       return `${day}/${month}/${year}`;
+    },
+    filterPosts() {
+      const searchText = this.searchText.toLowerCase();
+
+      this.posts = this.originalPosts.filter((post) => {
+        const location = post.location.toLowerCase();
+        const itineraryName = post.itineraryName.toLowerCase();
+
+        return (
+          location.includes(searchText) || itineraryName.includes(searchText)
+        );
+      });
     },
   },
 

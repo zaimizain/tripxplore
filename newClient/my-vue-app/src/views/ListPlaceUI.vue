@@ -21,7 +21,7 @@
                             <v-col>
                                 <v-icon class="mx-2">mdi-map-marker</v-icon>Located in {{ post.location }}
                                 <div>
-                                    <v-icon class="mx-2">mdi-cash</v-icon>RM{{ post.budget }}
+                                    <v-icon class="mx-2">mdi-cash</v-icon>{{ post.budget }}
                                 </div>
                                 <div>
                                     <v-icon class="mx-2">mdi-human-female-boy</v-icon>{{ post.age }}

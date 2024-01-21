@@ -13,12 +13,19 @@
             class="my-5"  density="compact" variant="solo" single-line hide-details></v-text-field>
             <v-text-field v-model="placeClass.post.expect" label="Expectations" prepend-icon="mdi-account-question" outlined
             class="my-5"  density="compact" variant="solo" single-line hide-details></v-text-field>
-            <v-text-field v-model="placeClass.post.age" label="Age Restriction" prepend-icon="mdi-human-child" outlined
-            class="my-5" :loading="loading" density="compact" variant="solo" single-line hide-details></v-text-field>
+           
+            <div class="age-selection">
+              <v-icon>mdi-human-child</v-icon> <div class="label mx-4">Select Age Limit </div>
+              <div class="label-and-select">
+                <v-select v-model="placeClass.post.age"   outlined  class="my-5" density="compact" variant="solo" single-line hide-details
+                  :items="['None', '+12 years old', 'Below 12 years old', '+18 years old', 'Below 18 years old']"></v-select>
+              </div>
+            </div>
+           
             <v-text-field v-model="placeClass.post.notes" label="Notes" prepend-icon="mdi-note-text" outlined
             class="my-5"  density="compact" variant="solo" single-line hide-details></v-text-field>
             <v-text-field v-model="placeClass.post.budget" label="Budget" prepend-icon="mdi-currency-usd" outlined
-               class="my-5" :loading="loading" density="compact" variant="solo" single-line hide-details></v-text-field>
+               class="my-5" :loading="loading" density="compact" variant="solo" single-line hide-details @input="formatCurrency"></v-text-field>
 
                
 
@@ -70,6 +77,23 @@ export default {
         async fetchPosts() {
             this.posts = await pAPI.getAllPlace();
         },
+        formatCurrency() {
+      let value = this.placeClass.post.budget;
+
+      // Remove non-numeric and non-decimal characters
+      value = value.replace(/[^0-9.]/g, '');
+
+      // Format as currency (Malaysian Ringgit)
+      const formattedValue = parseFloat(value).toLocaleString('en-MY', {
+        style: 'currency',
+        currency: 'MYR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+      // Update the model with the formatted value
+      this.placeClass.post.budget = formattedValue;
+    },
         selectFile(event) {
             console.log("Selected file:", event.target.files[0]);
             this.placeClass.selectFile(event.target.files[0]);
@@ -159,3 +183,20 @@ export default {
 };
 </script>
   
+<style scoped>
+.age-selection {
+  display: flex;
+  align-items: center;
+}
+
+.label-and-select {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px; /* Adjust margin as needed */
+}
+
+.label {
+  font-size: 14px; /* Adjust font size as needed */
+  margin-bottom: 4px; /* Adjust margin as needed */
+}
+</style>
